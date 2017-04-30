@@ -1,0 +1,23 @@
+{
+  "name": "urne",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "prop-types": "^15.5.0",
+    "react": "^15.3.0",
+    "react-bootstrap": "^0.30.9",
+    "react-dom": "^15.3.0",
+    "react-parallax": "^1.2.7",
+    "react-router": "4.0.0-alpha.3",
+    "react-router-bootstrap": "^0.24.2"
+  },
+  "devDependencies": {
+    "react-scripts": "0.9.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
