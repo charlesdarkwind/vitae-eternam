@@ -3,7 +3,9 @@ import React from 'react';
 import NavbarTop from './NavbarTop';
 import Store from './Store';
 import SampleUrns from '../SampleUrns';
+import Footer from './Footer';
 import base from '../base';
+import { authHandler } from '../auth';
 
 class App extends React.Component {
   constructor() {
@@ -14,81 +16,40 @@ class App extends React.Component {
     this.removeFromOrder = this.removeFromOrder.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
     this.logout = this.logout.bind(this);
-    this.authenticate = this.authenticate.bind(this);
-    this.authHandler = this.authHandler.bind(this); 
-
-    // get initial state
-   /* this.state = {
-      urns: {},
-      order: {}
-    };  */
-
+    //this.authenticate = this.authenticate.bind(this);
+    //this.authHandler = this.authHandler.bind(this); 
   }
 
   state = {
     urns: {},
-    order: {},
-    uid: null
+    order: {}
   };  
 
-  componentDidMount() {
+  componentWillMount() {
     base.onAuth((user) => {
       if(user) {
-        this.authHandler(null, { user });
+        authHandler(this, null, { user });
       }
     });
-  }
 
-  authenticate(provider) {
-    console.log(`Tentative de connexion avec ${provider}`);
-    base.authWithOAuthPopup(provider, this.authHandler);
-  }
-
-  authHandler(err, authData) {
-    console.log(err, authData);
-    if(err) {
-      console.error(err);
-      return; 
-    }
-
-    // grab the cart/order info
-    const orderRef = base.database().ref(this.props.uid); //NEED SOME ID REFERING TO CURRENT ORDER CART
-
-    // query the firebase ref once for the cart data and set the state
-    orderRef.once('value', (snapshot) => {
-      const data = snapshot.val()  || {};
-      this.setState({
-        uid: authData.user.uid
-      });
-    });   
-  }
-
-  componentWillMount() {
     //this runs  before <App> is rendered
-  this.ref = base.syncState(`/store/urns`
-    , {
-      context: this,
-      state: 'urns'
+    this.ref = base.syncState(`/store/urns`
+      , {
+        context: this,
+        state: 'urns'
     });
 
     // check if customer has any order/items in localstorage
-    const localStorageRef = localStorage.getItem(`order-${this.props.uid}`);
-
-    if(localStorageRef) {
+    if(localStorage.getItem("order")) {
       //update our App components's order state
       this.setState({
-        order: JSON.parse(localStorageRef)
+        order: JSON.parse(localStorage.getItem("order"))
       });
     }
   }
 
-  componentWillUnmount() {
-    base.removeBinding(this.ref);
-  }
-
   componentWillUpdate(nextProps, nextState) {
-    localStorage.setItem(`order-${this.props.params.customerID}`,
-      JSON.stringify(nextState.order));
+    localStorage.setItem("order", JSON.stringify(nextState.order));
   }
 
   loadSamples = () => {
@@ -125,7 +86,6 @@ class App extends React.Component {
     // take a copy of our state
     const order = {...this.state.order};
     // update or add the new number of urns/items ordered
-    // ! can only set to 1 for now since we won't have two of the same :P !
      //order[key] = order[key] + 1 || 1;  eventually with more than one of the same item to sell!
     order[key] = 1;
     // update our state
@@ -155,6 +115,7 @@ class App extends React.Component {
           removeUrn={this.removeUrn}
           addToOrder={this.addToOrder}
         />
+        <Footer />
       </div>          
     );
   }

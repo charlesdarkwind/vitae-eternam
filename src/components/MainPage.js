@@ -1,15 +1,21 @@
 import React from 'react';
 import NavbarTop from './NavbarTop';
+import Footer from './Footer';
 import imgBackground from '../img/Woodturning2.jpg';
 import urn1 from '../img/urn1.png';
 import { Parallax } from 'react-parallax';
+import base from '../base';
+import { authHandler } from '../auth';
 import '../css/index.css';
 
 class MainPage extends React.Component {
-	goToStore() {
-		this.context.router.transitionTo(`/store`);
-	}
-
+	componentWillMount() {
+    	base.onAuth((user) => {
+      		if(user) {
+        		authHandler(this, null, { user });
+      		}
+    	});
+  	}
 	render() {
     	return (
 	    	<div>
@@ -21,7 +27,7 @@ class MainPage extends React.Component {
 			          	Les Urnes<br/>
 			          	Vitam Aeternam
 		          	</div>
-		          	<button type="button" className="btn1" onClick={() => this.goToStore()}>Nos urnes</button>
+		          	<a href="/boutique"><button type="button" className="btn1" >Nos urnes</button></a>
 		          </div>	      
 		        </Parallax>
 		      </div>
@@ -40,13 +46,10 @@ class MainPage extends React.Component {
 		        		</p>
 		        	</div>
 		      </div>
+		      <Footer />
 	      </div>
     	)
    }
-}
-
-MainPage.contextTypes = {
-	router: React.PropTypes.object
 }
 
 export default MainPage;

@@ -1,27 +1,25 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import base from '../base';
+import { authHandler } from '../auth';
 import NavbarTop from './NavbarTop';
+import Footer from './Footer';
+
 
 class Login extends React.Component {
-	componentDidMount() {
+	componentWillMount() {
 		base.onAuth((user) => {
 			if(user) {
-				this.authHandler(null, { user });
+				authHandler(this, null, { user });
 			}
 		});
 	}
-/*
-	renderLogin() {
-    return (
-      <nav className="login">
-        <p>Connexion</p>
-        <Button bsStyle="primary" className="facebook" onClick={() => this.props.authenticate('facebook')}>Connexion avec FaceBook</Button>
-        <Button bsStyle="danger" className="google" onClick={() => this.authenticate('google')}>Connexion avec Google</Button>
-      </nav>
-    )
-  }
-*/
+
+	authenticate(provider) {
+    	console.log(`Tentative de connexion avec ${provider}`);
+    	base.authWithOAuthPopup(provider, authHandler);
+  	}
+
 	render() {
 		return (
 			<div>
@@ -29,10 +27,11 @@ class Login extends React.Component {
 				<div className="loginWrap">
 					<nav className="login">
 	        			<p>Connexion</p>
-	        			<Button bsStyle="primary" className="facebook" onClick={() => this.props.authenticate('facebook')}>Connexion avec FaceBook</Button>
-	        			<Button bsStyle="danger" className="google" onClick={() => this.props.authenticate('google')}>Connexion avec Google</Button>
+	        			<Button bsStyle="primary" className="facebook" onClick={() => this.authenticate('facebook')}>Connexion avec FaceBook</Button>
+	        			<Button bsStyle="danger" className="google" onClick={() => this.authenticate('google')}>Connexion avec Google</Button>
 	      		</nav>				
 				</div>
+				<Footer />
 			</div>
 		)
 	}
