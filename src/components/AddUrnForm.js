@@ -4,9 +4,6 @@ import React from 'react';
 class AddUrnForm extends React.Component {
 	createUrn(event) {
 		event.preventDefault();
-		const timestamp = Date.now();
-		const tempObj = {};
-		//tempObj['urn-'+timestamp]
 		const urn = {
 			name: this.name.value,
 			price: this.price.value,
@@ -14,7 +11,6 @@ class AddUrnForm extends React.Component {
 			imageLarge: this.imageLarge.value,
 			desc: this.desc.value
 		};
-		//console.log(tempObj);
 		this.props.addUrn(urn);
 		this.urnForm.reset();
 	}

@@ -27,7 +27,7 @@ class MainPage extends React.Component {
 		          <div className="parallaxInner">
 		          	<div className="parallaxText">
 			          	Les Urnes<br/>
-			          	Vitam Aeternam
+			          	Vitae Aeternam
 		          	</div>
 		          	<a href="/boutique"><button type="button" className="btn1" >Nos urnes</button></a>
 		          </div>	      

@@ -17,6 +17,7 @@ class Inventory extends React.Component {
 			...urn,
 			[e.target.name]: e.target.value
 		}
+		console.log(updatedUrn);
 		this.props.updateUrn(key, updatedUrn);
 	}
 

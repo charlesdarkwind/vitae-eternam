@@ -1,4 +1,4 @@
-import base from '../base';
+//import base from '../base';
 
 export function addUrn(urn) {
   const id = 'urn-'+Date.now();
@@ -8,6 +8,22 @@ export function addUrn(urn) {
     id
   }
 }
+
+export function removeUrn(key) {
+  return {
+    type: 'REMOVE_URN',
+    key
+  }
+}
+
+export function updateUrn(key, updatedUrn) {
+  return {
+    type: 'UPDATE_URN',
+    key,
+    updatedUrn
+  }
+}
+
 /*
 export function connect(uid) {
   return {
@@ -17,13 +33,3 @@ export function connect(uid) {
 }
 */
 
-/*
-// remove urn
-export function removeUrn(postId, i) {
-  return {
-    type: 'REMOVE_COMMENT',
-    i,
-    postId
-  }
-}
-*/

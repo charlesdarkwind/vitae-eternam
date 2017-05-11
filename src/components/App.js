@@ -46,18 +46,6 @@ class App extends React.Component {
     });
   };
 
-   updateUrn = (key, updatedUrn) => {
-    const urns = {...this.state.urns};
-    urns[key] = updatedUrn;
-    this.setState({ urns });
-  }
-
-  removeUrn = (key) => {
-    const urns = {...this.props.urns};
-    urns[key] = null;
-    this.setState({ urns });
-  };
-
   addToOrder(key) {
     // take a copy of our state
     const order = {...this.state.order};
@@ -87,8 +75,8 @@ class App extends React.Component {
           addUrn={this.props.addUrn}
           loadSamples={this.loadSamples}
           urns={this.props.urns}
-          updateUrn={this.updateUrn}
-          removeUrn={this.removeUrn}
+          updateUrn={this.props.updateUrn}
+          removeUrn={this.props.removeUrn}
           addToOrder={this.addToOrder}
         />
         <Footer />

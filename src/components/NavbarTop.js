@@ -5,7 +5,7 @@ const NavbarTop = () => (
 	<Navbar className="navBarTop">
     <Navbar.Header>
       <Navbar.Brand>
-      	<a href="/">Les Urnes Vitam Aeternam</a>
+      	<a href="/">Les Urnes Vitae Aeternam</a>
       </Navbar.Brand>
     </Navbar.Header>
     <Navbar.Collapse>
