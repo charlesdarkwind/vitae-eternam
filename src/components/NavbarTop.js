@@ -10,7 +10,7 @@ const NavbarTop = () => (
     </Navbar.Header>
     <Navbar.Collapse>
     <Nav>
-      <NavItem href="/store/">Nos urnes</NavItem>
+      <NavItem href="/boutique/">Nos urnes</NavItem>
     </Nav>
     <Nav pullRight>
         <NavItem href="/connexion/">Connexion</NavItem>
@@ -19,9 +19,5 @@ const NavbarTop = () => (
     </Navbar.Collapse>
   </Navbar>
 );
-
-NavbarTop.contextTypes = {
-	router: React.PropTypes.object
-}
 
 export default NavbarTop;
