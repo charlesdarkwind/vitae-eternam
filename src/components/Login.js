@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import base from '../base';
-import { authHandler } from '../auth';
 import NavbarTop from './NavbarTop';
 import Footer from './Footer';
 
+import base from '../base';
+import { authHandler } from '../auth';
 
 class Login extends React.Component {
 	componentWillMount() {

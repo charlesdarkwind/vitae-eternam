@@ -5,19 +5,6 @@ import { Well } from 'react-bootstrap';
 import Urn from './Urn';
 
 class Store extends React.Component {
-	constructor() {
-		super();
-	}
-	state = {
-    urns: {},
-    order: {}
-  };
-/*
-	// A RETIRER  !!!!
-	state = {
-      urns: SampleUrns,
-      order: {}
-    };*/
 	render() {
 		return (
 			<div>

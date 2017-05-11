@@ -1,61 +1,48 @@
 import React from 'react';
-
 import NavbarTop from './NavbarTop';
 import Store from './Store';
 import SampleUrns from '../SampleUrns';
 import Footer from './Footer';
+
 import base from '../base';
 import { authHandler } from '../auth';
 
 class App extends React.Component {
-  constructor() {
-    super();
-
+  constructor(props) {
+    super(props);
     this.loadSamples = this.loadSamples.bind(this);
-    this.addUrn = this.addUrn.bind(this);
     this.removeFromOrder = this.removeFromOrder.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
     this.logout = this.logout.bind(this);
     //this.authenticate = this.authenticate.bind(this);
     //this.authHandler = this.authHandler.bind(this); 
   }
-
-  state = {
-    urns: {},
-    order: {}
-  };  
-
+  
   componentWillMount() {
     base.onAuth((user) => {
       if(user) {
         authHandler(this, null, { user });
       }
     });
-
-    //this runs  before <App> is rendered
+    // two way data binding with state and firebase
+    /*
     this.ref = base.syncState(`/store/urns`
       , {
         context: this,
         state: 'urns'
     });
-
-    // check if customer has any order/items in localstorage
-    if(localStorage.getItem("order")) {
-      //update our App components's order state
-      this.setState({
-        order: JSON.parse(localStorage.getItem("order"))
-      });
-    }
+    */
   }
 
   componentWillUpdate(nextProps, nextState) {
     localStorage.setItem("order", JSON.stringify(nextState.order));
   }
 
+  //+++ TO CHANGE AFTER 
   loadSamples = () => {
     console.log("loading sample")
       this.setState({
-        urns: SampleUrns
+        urns: this.props.urns
     });
   };
 
@@ -70,17 +57,6 @@ class App extends React.Component {
     urns[key] = null;
     this.setState({ urns });
   };
-
-
-  addUrn(urn) {
-    // update our state
-    const urns = {...this.state.urns};
-    // add in our new urn
-    const timestamp = Date.now();
-    urns[`urn-${timestamp}`] = urn;
-    // set state
-    this.setState({ urns })
-  }
 
   addToOrder(key) {
     // take a copy of our state
@@ -106,11 +82,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <NavbarTop />
+        <NavbarTop />      
         <Store 
-          addUrn={this.addUrn}
+          addUrn={this.props.addUrn}
           loadSamples={this.loadSamples}
-          urns={this.state.urns}
+          urns={this.props.urns}
           updateUrn={this.updateUrn}
           removeUrn={this.removeUrn}
           addToOrder={this.addToOrder}

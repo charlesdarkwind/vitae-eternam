@@ -4,8 +4,10 @@ import Footer from './Footer';
 import imgBackground from '../img/Woodturning2.jpg';
 import urn1 from '../img/urn1.png';
 import { Parallax } from 'react-parallax';
+
 import base from '../base';
 import { authHandler } from '../auth';
+
 import '../css/index.css';
 
 class MainPage extends React.Component {
