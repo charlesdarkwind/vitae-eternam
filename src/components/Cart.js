@@ -9,7 +9,8 @@ class Cart extends React.Component {
 	componentWillMount() {
     	base.onAuth((user) => {
    		if(user) {
-     			authHandler(this, null, { user });
+     			//authHandler(this, null, { user });
+     			this.props.setUser(user.displayName, user.email, user.photoURL, user.uid);
    		}
     	});
   	}

@@ -19,11 +19,14 @@ class App extends React.Component {
   }
   
   componentWillMount() {
+
     base.onAuth((user) => {
       if(user) {
-        authHandler(this, null, { user });
-      }
+        //authHandler(this, null, { user });
+        this.props.setUser(user.displayName, user.email, user.photoURL, user.uid);
+      } 
     });
+    
     // two way data binding with state and firebase
     /*
     this.ref = base.syncState(`/store/urns`
@@ -33,11 +36,11 @@ class App extends React.Component {
     });
     */
   }
-
+/*
   componentWillUpdate(nextProps, nextState) {
     localStorage.setItem("order", JSON.stringify(nextState.order));
   }
-
+*/
   //+++ TO CHANGE AFTER 
   loadSamples = () => {
     console.log("loading sample")

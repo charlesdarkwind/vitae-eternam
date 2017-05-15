@@ -1,5 +1,3 @@
-//import base from '../base';
-
 export function addUrn(urn) {
   const id = 'urn-'+Date.now();
   return {
@@ -24,12 +22,20 @@ export function updateUrn(key, updatedUrn) {
   }
 }
 
-/*
-export function connect(uid) {
+export function setUser(name, email, photoURL, uid) {
   return {
     type: 'SET_USER',
+    name,
+    email, 
+    photoURL, 
     uid
   }
 }
-*/
+
+export function removeUser() {
+  return {
+    type: 'REMOVE_USER',
+  }
+}
+
 
