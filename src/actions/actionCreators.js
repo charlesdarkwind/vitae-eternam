@@ -32,6 +32,19 @@ export function setUser(name, email, photoURL, uid) {
   }
 }
 
+export function setAdress(firstName, lastName, road, city, state, ZIP, phone) {
+  return {
+    type: 'SET_ADRESS',
+    firstName,
+    lastName,
+    road,
+    city,
+    state,
+    ZIP,
+    phone
+  }
+}
+
 export function removeUser() {
   return {
     type: 'REMOVE_USER',

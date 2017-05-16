@@ -14,8 +14,12 @@ function user(state = {}, action) {
 				name: null,
 				email: null,
 				photoURL: null,
-				uid: null	
+				uid: null,
+				adress: {}
 			})
+		case 'SET_ADRESS':
+		console.log('Setting Adress Infos')
+		return 
 		default:
 			return state;
 	}

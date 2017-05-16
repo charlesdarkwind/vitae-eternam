@@ -309,6 +309,11 @@ body {
 	height: auto;
 }
 
+.userFormWrap {
+	width: 50%;
+	margin: auto;
+}
+
 @media only screen and (max-width: 788px) {
 	.mainSection1 {
 		margin-bottom: 60px;
@@ -365,6 +370,11 @@ body {
 		text-align: center;
 		margin: 8%;
 		float:none;
+	}
+
+	/*Login*/
+	.userFormWrap {
+	width: 80%;
 	}
 }
 

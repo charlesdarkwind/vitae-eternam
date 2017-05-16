@@ -1,12 +1,36 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
-import NavbarTop from './NavbarTop';
-import Footer from './Footer';
+import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import base from '../base';
-import Offline from './Offline';
 import { authHandler } from '../auth';
 
+import NavbarTop from './NavbarTop';
+import Footer from './Footer';
+import Offline from './Offline';
+
+function FieldGroup({ id, label, help, ...props }) {
+  return (
+    <FormGroup controlId={id}>
+      <ControlLabel>{label}</ControlLabel>
+      <FormControl {...props} />
+    </FormGroup>
+  );
+}
+
 class Login extends React.Component {
+	constructor(props) {
+		super(props);
+		this.handleChange = this.handleChange.bind(this);
+		this.state = {
+			fistName: '',
+			lastName: '',
+			adress: '',
+			city: '',
+			state: '',
+			ZIP: '',
+			phone: ''
+
+		}
+	}
 	componentWillMount() {
 		base.onAuth((user) => {
 			if(user) {					
@@ -26,6 +50,22 @@ class Login extends React.Component {
   		this.props.removeUser();
   	}
 
+  	handleChange(e) {
+  		e.preventDefault();
+  		const myObj = {};
+  		myObj.adress = e.target.value;
+    	this.setState = ({ 
+    		fistName: e.target.,
+			lastName: e.target.,
+			adress: e.target.,
+			city: e.target.,
+			state: e.target.,
+			ZIP: e.target.,
+			phone: e.target.
+    	});
+    	console.log(e.target.value);
+  	}
+
   	renderContent() {	
   		if (this.props.user.uid) {
   			const firstName = this.props.user.name.split(" ")[0];
@@ -38,29 +78,68 @@ class Login extends React.Component {
 		  				<div className="photoUser"><img src={this.props.user.photoURL}/></div>
 		  				<p>Informations</p>
 		  				<div className="userFormWrap">
-		  					<form ref={(input) => this.userForm = input} className="userForm" onSubmit={(e) => this.handleChange(e)} >
-		  						<input ref={(input) => this.firstName = input} className="firstName" defaultValue={firstName} placeholder="Prénom"></input>
-		  						<input ref={(input) => this.lastName = input} className="lastName" defaultValue={lastName} placeholder="Nom"></input>
-		  						<input ref={(input) => this.road = input} className="road" placeholder="Adresse"></input>
-		  						<input ref={(input) => this.city = input} className="city" placeholder="Ville"></input>
-		  						<select ref={(input) => this.state = input} className="state" placeholder="Province">
-		  							<option selected disabled>Province</option>
-		  							<option disabled>_________</option>
-		  							<option value="Alberta">Alberta</option>
-		  							<option value="Colombie-Britannique">Colombie-Britannique</option>
-		  							<option value="Île-du-Prince-Édouard">Île-du-Prince-Édouard</option>
-		  							<option value="Manitoba">Manitoba</option>
-		  							<option value="Nouveau-Brunswick">Nouveau-Brunswick</option>
-		  							<option value="Nouvelle Écosse">Nouvelle Écosse</option>
-		  							<option value="Ontario">Ontario</option>
-		  							<option value="Québec">Québec</option>
-		  							<option value="Saskatchewan">Saskatchewan</option>
-		  							<option value="Terre-Neuve-et-Labrador">Terre-Neuve-et-Labrador</option>
-		  						</select>
-		  						<input ref={(input) => this.state = input} className="ZIP" placeholder="Code Postal"></input>
-		  						<input ref={(input) => this.phoneNumber = input} className="phoneNumber" placeholder="Num. Téléphone"></input>
-		  						<button type="submit">Enregistrer</button>
-		  					</form>
+		  					<form onSubmit={(e) => this.handleChange(e)}>
+							   <FieldGroup
+							   	value={this.state.firstName}
+							      id="formControlsName"
+							      type="text"
+							      label="Prénom"
+							      placeholder="Prénom"
+							      defaultValue={firstName}
+							   />
+							   <FieldGroup
+							   value={this.state.}
+							      id="formControlsName"
+							      type="text"
+							      label="Nom"
+							      placeholder="Nom"
+							      defaultValue={lastName}
+							   />
+							   <FieldGroup
+							      id="formControlsRoad"
+							      label="Adresse"
+							      type="text"
+							      placeholder="Adresse"
+							   />
+							   <FieldGroup
+							      id="formControlsCity"
+							      label="Ville"
+							      type="text"
+							      placeholder="Ville"
+							   />
+							   <FormGroup controlId="formControlsSelect">
+							      <ControlLabel>Province</ControlLabel>
+							      <FormControl componentClass="select" placeholder="Select">
+							        <option value="select">choisir</option>
+							        <option disabled>____________________</option>
+							        <option value="Alberta">Alberta</option>
+							        <option value="Colombie-Britannique">Colombie-Britannique</option>
+							        <option value="Île-du-Prince-Édouard">Île-du-Prince-Édouard</option>
+							        <option value="Manitoba">Manitoba</option>
+							        <option value="Nouveau-Brunswick">Nouveau-Brunswick</option>
+							        <option value="Nouvelle Écosse">Nouvelle Écosse</option>
+							        <option value="Ontario">Ontario</option>
+							        <option value="Québec">Québec</option>
+							        <option value="Saskatchewan">Saskatchewan</option>
+							        <option value="Terre-Neuve-et-Labrador">Terre-Neuve-et-Labrador</option>
+							      </FormControl>
+							   </FormGroup>
+							   <FieldGroup
+							      id="formControlsZIP"
+							      label="Code Postal"
+							      type="text"
+							      placeholder="Code Postal"
+							   />
+							   <FieldGroup
+							      id="formControlsPhone"
+							      label="Numéro de Téléphone"
+							      type="tel"
+							      placeholder="Numéro de Téléphone"
+							   />
+							   <Button type="submit">
+							     Enregistrer
+							   </Button>
+							</form>
 		  				</div>
 		  			</div>		
 		  			<Button bsStyle="warning" className="unauth" onClick={() => this.unauth()}>Déconnexion</Button>
@@ -88,3 +167,27 @@ class Login extends React.Component {
 }
 
 export default Login;
+/*
+<form ref={(input) => this.userForm = input} className="userForm" onSubmit={(e) => this.handleChange(e)} >
+	<input ref={(input) => this.firstName = input} className="firstName" defaultValue={firstName} placeholder="Prénom"></input>
+	<input ref={(input) => this.lastName = input} className="lastName" defaultValue={lastName} placeholder="Nom"></input>
+	<input ref={(input) => this.road = input} className="road" placeholder="Adresse"></input>
+	<input ref={(input) => this.city = input} className="city" placeholder="Ville"></input>
+	<select ref={(input) => this.state = input} className="state" placeholder="Province">
+		<option selected disabled>Province</option>
+		<option disabled>_________</option>
+		<option value="Alberta">Alberta</option>
+		<option value="Colombie-Britannique">Colombie-Britannique</option>
+		<option value="Île-du-Prince-Édouard">Île-du-Prince-Édouard</option>
+		<option value="Manitoba">Manitoba</option>
+		<option value="Nouveau-Brunswick">Nouveau-Brunswick</option>
+		<option value="Nouvelle Écosse">Nouvelle Écosse</option>
+		<option value="Ontario">Ontario</option>
+		<option value="Québec">Québec</option>
+		<option value="Saskatchewan">Saskatchewan</option>
+		<option value="Terre-Neuve-et-Labrador">Terre-Neuve-et-Labrador</option>
+	</select>
+	<input ref={(input) => this.state = input} className="ZIP" placeholder="Code Postal"></input>
+	<input ref={(input) => this.phoneNumber = input} className="phoneNumber" placeholder="Num. Téléphone"></input>
+	<button type="submit">Enregistrer</button>
+</form>*/
