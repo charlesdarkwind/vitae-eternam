@@ -23,21 +23,23 @@ export function updateUrn(key, updatedUrn) {
 }
 
 export function setUser(name, email, photoURL, uid) {
+  const adress = {};
   return {
     type: 'SET_USER',
     name,
     email, 
     photoURL, 
-    uid
+    uid,
+    adress
   }
 }
 
-export function setAdress(firstName, lastName, road, city, state, ZIP, phone) {
+export function setAdress(firstName, lastName, adress, city, state, ZIP, phone) {
   return {
     type: 'SET_ADRESS',
     firstName,
     lastName,
-    road,
+    adress,
     city,
     state,
     ZIP,

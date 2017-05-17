@@ -6,7 +6,7 @@ import { browserHistory } from 'react-router';
 import rootReducer from './reducers/index';
 
 import urns from './SampleUrns';
-const user = {name: null, email: null, photoURL: null, uid: null}
+const user = {name: null, email: null, photoURL: null, uid: null, adress: {}}
 
 // create an object for the default data
 const defaultState = {

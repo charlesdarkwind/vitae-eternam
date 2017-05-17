@@ -6,7 +6,8 @@ function user(state = {}, action) {
 				name: action.name,
 				email: action.email,
 				photoURL: action.photoURL,
-				uid: action.uid		
+				uid: action.uid,
+				adress: action.adress
 			})
 		case 'REMOVE_USER':
 			console.log('User deconnecting')
@@ -19,10 +20,34 @@ function user(state = {}, action) {
 			})
 		case 'SET_ADRESS':
 		console.log('Setting Adress Infos')
-		return 
+		return {
+			...state,
+			adress: {
+				firstName: action.firstName,
+    			lastName: action.lastName,
+    			adress: action.adress,
+    			city: action.city,
+    			state: action.state,
+    			ZIP: action.ZIP,
+    			phone: action.phone
+			}
+		}
 		default:
 			return state;
 	}
 }
 
 export default user;
+
+/*
+return Object.assign({}, state, {
+			...state.user.adress,
+			firstName: action.firstName,
+    		lastName: action.lastName,
+    		adress: action.adress,
+    		city: action.city,
+    		state: action.state,
+    		ZIP: action.ZIP,
+    		phone: action.phone
+		})
+    		*/

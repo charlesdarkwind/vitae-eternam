@@ -374,12 +374,17 @@ body {
 
 	/*Login*/
 	.userFormWrap {
-	width: 80%;
+		width: 70%;
 	}
 }
 
 @media only screen and (max-width: 470px) {
 	.imageCont {
 		margin-left: 5%;
+	}
+
+	/*Login*/
+	.userFormWrap {
+		width: 80%;
 	}
 }

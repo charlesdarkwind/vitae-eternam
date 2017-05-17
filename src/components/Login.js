@@ -7,6 +7,8 @@ import NavbarTop from './NavbarTop';
 import Footer from './Footer';
 import Offline from './Offline';
 
+const adressObj = {};
+
 function FieldGroup({ id, label, help, ...props }) {
   return (
     <FormGroup controlId={id}>
@@ -20,15 +22,17 @@ class Login extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		
+		const adressObj = this.props.user.adress;	
 		this.state = {
-			fistName: '',
-			lastName: '',
-			adress: '',
-			city: '',
-			state: '',
-			ZIP: '',
-			phone: ''
-
+			firstName: adressObj.firstName || '',
+			lastName: adressObj.lastName || '',
+			adress: adressObj.adress || '',
+			city: adressObj.city || '',
+			state: adressObj.state || '',
+			ZIP: adressObj.ZIP || '',
+			phone: adressObj.phone || ''
 		}
 	}
 	componentWillMount() {
@@ -51,19 +55,18 @@ class Login extends React.Component {
   	}
 
   	handleChange(e) {
-  		e.preventDefault();
-  		const myObj = {};
-  		myObj.adress = e.target.value;
-    	this.setState = ({ 
-    		fistName: e.target.,
-			lastName: e.target.,
-			adress: e.target.,
-			city: e.target.,
-			state: e.target.,
-			ZIP: e.target.,
-			phone: e.target.
+  		const target = e.target;
+  		const value = target.value;
+  		const id = target.id;
+    	this.setState({ 
+    		[id]: value
     	});
-    	console.log(e.target.value);
+  	}
+
+  	handleSubmit(e) {
+  		e.preventDefault();
+  		const { firstName, lastName, adress, city, state, ZIP, phone } = this.state;
+  		this.props.setAdress(firstName, lastName, adress, city, state, ZIP, phone);
   	}
 
   	renderContent() {	
@@ -75,42 +78,46 @@ class Login extends React.Component {
 	  			<div>	
 		  			<div className="userInfo">
 		  				{this.props.user.name}
-		  				<div className="photoUser"><img src={this.props.user.photoURL}/></div>
-		  				<p>Informations</p>
+		  				<div className="photoUser"><img src={this.props.user.photoURL}/></div>	  				
 		  				<div className="userFormWrap">
-		  					<form onSubmit={(e) => this.handleChange(e)}>
+		  				<p>Adresse de livraison</p>
+		  					<form onSubmit={(e) => this.handleSubmit(e)}>
 							   <FieldGroup
-							   	value={this.state.firstName}
-							      id="formControlsName"
+							   	defaultValue={this.state.firstName}
+							   	onChange={(e) => this.handleChange(e)}
+							      id="firstName"
 							      type="text"
 							      label="Prénom"
 							      placeholder="Prénom"
-							      defaultValue={firstName}
 							   />
 							   <FieldGroup
-							   value={this.state.}
-							      id="formControlsName"
+							   defaultValue={this.state.lastName}
+							   onChange={(e) => this.handleChange(e)}
+							      id="lastName"
 							      type="text"
 							      label="Nom"
 							      placeholder="Nom"
-							      defaultValue={lastName}
 							   />
 							   <FieldGroup
-							      id="formControlsRoad"
+							   defaultValue={this.state.adress}
+							   onChange={(e) => this.handleChange(e)}
+							      id="adress"
 							      label="Adresse"
 							      type="text"
 							      placeholder="Adresse"
 							   />
 							   <FieldGroup
-							      id="formControlsCity"
+							   defaultValue={this.state.city}
+							   onChange={(e) => this.handleChange(e)}
+							      id="city"
 							      label="Ville"
 							      type="text"
 							      placeholder="Ville"
 							   />
-							   <FormGroup controlId="formControlsSelect">
+							   <FormGroup controlId="state">
 							      <ControlLabel>Province</ControlLabel>
-							      <FormControl componentClass="select" placeholder="Select">
-							        <option value="select">choisir</option>
+							      <FormControl componentClass="select" placeholder="Select" defaultValue={this.state.state} onChange={(e) => this.handleChange(e)}>
+							        <option value="select">Sélection</option>
 							        <option disabled>____________________</option>
 							        <option value="Alberta">Alberta</option>
 							        <option value="Colombie-Britannique">Colombie-Britannique</option>
@@ -125,16 +132,20 @@ class Login extends React.Component {
 							      </FormControl>
 							   </FormGroup>
 							   <FieldGroup
-							      id="formControlsZIP"
+							   defaultValue={this.state.ZIP}
+							   onChange={(e) => this.handleChange(e)}
+							      id="ZIP"
 							      label="Code Postal"
 							      type="text"
 							      placeholder="Code Postal"
 							   />
 							   <FieldGroup
-							      id="formControlsPhone"
-							      label="Numéro de Téléphone"
+							   defaultValue={this.state.phone}
+							   onChange={(e) => this.handleChange(e)}
+							      id="phone"
+							      label="Téléphone"
 							      type="tel"
-							      placeholder="Numéro de Téléphone"
+							      placeholder="Téléphone"
 							   />
 							   <Button type="submit">
 							     Enregistrer
