@@ -1,4 +1,5 @@
 import React from 'react';
+import CartItem from './CartItem';
 import NavbarTop from './NavbarTop';
 import Footer from './Footer';
 
@@ -13,6 +14,7 @@ class Cart extends React.Component {
      			this.props.setUser(user.displayName, user.email, user.photoURL, user.uid);
    		}
     	});
+
   	}
 	render() {
 		return (
@@ -20,7 +22,18 @@ class Cart extends React.Component {
 				<NavbarTop />
 				<div className="cartWrap">
 					<h2>Panier d'achat</h2>			
-									
+					<div className="cartInner">
+							{
+								Object.keys(JSON.parse(localStorage.getItem('order'))).map(key => 
+										<CartItem
+											key={key}
+											index={key}
+											details={this.props.urns[key]}
+											removeFromOrder={this.props.removeFromOrder}
+										/>
+									)
+							}
+					</div>	
 				</div>
 				<Footer />
 			</div>

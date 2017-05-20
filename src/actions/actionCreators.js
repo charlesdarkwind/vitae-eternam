@@ -49,8 +49,23 @@ export function setAdress(firstName, lastName, adress, city, state, ZIP, phone) 
 
 export function removeUser() {
   return {
-    type: 'REMOVE_USER',
+    type: 'REMOVE_USER'
+  }
+}
+
+export function setOrderItem(urn) {
+  return {
+    type: 'SET_ORDER_ITEM',
+    urn
   }
 }
 
 
+export function removeOrderItem(orderObj, urn) {
+  const i = orderObj.indexOf(urn);
+  return {
+    type: 'REMOVE_ORDER_ITEM',
+    urn,
+    i
+  }
+}

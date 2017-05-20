@@ -11,15 +11,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.loadSamples = this.loadSamples.bind(this);
-    this.removeFromOrder = this.removeFromOrder.bind(this);
-    this.addToOrder = this.addToOrder.bind(this);
+    this.setOrderItem = this.setOrderItem.bind(this);
+    this.removeOrderItem = this.bind.removeOrderItem(this);
     this.logout = this.logout.bind(this);
     //this.authenticate = this.authenticate.bind(this);
-    //this.authHandler = this.authHandler.bind(this); 
   }
   
   componentWillMount() {
-
     base.onAuth((user) => {
       if(user) {
         //authHandler(this, null, { user });
@@ -35,12 +33,16 @@ class App extends React.Component {
         state: 'urns'
     });
     */
+    /*
+    const localStorageRef = localStorage.getItem('order');
+    if(localStorageRef) {
+      this.setState({
+        order: JSON.parse(localStorageRef)
+      });
+    }
+    */
   }
-/*
-  componentWillUpdate(nextProps, nextState) {
-    localStorage.setItem("order", JSON.stringify(nextState.order));
-  }
-*/
+
   //+++ TO CHANGE AFTER 
   loadSamples = () => {
     console.log("loading sample")
@@ -49,20 +51,12 @@ class App extends React.Component {
     });
   };
 
-  addToOrder(key) {
-    // take a copy of our state
-    const order = {...this.state.order};
-    // update or add the new number of urns/items ordered
-     //order[key] = order[key] + 1 || 1;  eventually with more than one of the same item to sell!
-    order[key] = 1;
-    // update our state
-    this.setState({ order });
+  setOrderItem(key) { 
+    if (this.props.order.indexOf(key) == -1) this.props.setOrderItem(key);
   }
 
-  removeFromOrder(key) {
-    const order = {...this.state.order};
-    delete order[key];
-    this.setState({ order });
+  removeOrderItem(key) {
+    this.props.removeOrderItem(this.props.removeOrderItem, key);
   }
 
   logout() {
@@ -80,7 +74,8 @@ class App extends React.Component {
           urns={this.props.urns}
           updateUrn={this.props.updateUrn}
           removeUrn={this.props.removeUrn}
-          addToOrder={this.addToOrder}
+          setOrderItem={this.setOrderItem}
+          removeOrderItem={this.removeOrderItem}
         />
         <Footer />
       </div>          

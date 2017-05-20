@@ -6,12 +6,15 @@ import { browserHistory } from 'react-router';
 import rootReducer from './reducers/index';
 
 import urns from './SampleUrns';
-const user = {name: null, email: null, photoURL: null, uid: null, adress: {}}
+const user = {name: null, email: null, photoURL: null, uid: null, adress: {}};
+const order = [];
+
 
 // create an object for the default data
 const defaultState = {
   urns,
-  user
+  user,
+  order
 };
 
 const store = createStore(rootReducer, defaultState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

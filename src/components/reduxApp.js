@@ -6,7 +6,8 @@ import App from './App';
 function mapStateToProps(state) {
   return {
     urns: state.urns,
-    user: state.user
+    user: state.user,
+    order: state.order
   }
 }
 

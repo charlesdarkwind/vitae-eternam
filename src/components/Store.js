@@ -17,7 +17,7 @@ class Store extends React.Component {
 													key={key} 
 													index={key}
 													details={this.props.urns[key]} 
-													addToOrder={this.props.addToOrder}
+													setOrderItem={this.props.setOrderItem}
 												/>
 									)
 						}

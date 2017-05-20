@@ -4,10 +4,8 @@ import { Glyphicon, Modal, Button } from 'react-bootstrap';
 class Urn extends React.Component {
 	constructor() {
 		super();	
-
 		this.showModal = this.showModal.bind(this);
 		this.hideModal = this.hideModal.bind(this);
-
 		this.state = {
 			show: false
 		}
@@ -38,7 +36,7 @@ class Urn extends React.Component {
 						<p>{details.desc}</p>
 					</div>
 					<div className="btnCart">
-						<Button onClick={() => this.props.addToOrder(index)} >Ajouter au panier<Glyphicon className="cart" glyph="heart-empty"/></Button>			
+						<Button onClick={() => this.props.setOrderItem(index)}>Ajouter au panier<Glyphicon className="cart" glyph="heart-empty"/></Button>			
 					</div>
 				</div>
 				<Modal

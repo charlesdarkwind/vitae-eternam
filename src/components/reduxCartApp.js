@@ -6,7 +6,8 @@ import Cart from './Cart';
 function mapStateToProps(state) {
   return {
     urns: state.urns,
-    user: state.user
+    user: state.user,
+    order: state.order
   }
 }
 

@@ -16,29 +16,29 @@ const urns = {
 		desc: 'Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.'
 	},
 	urn3: {
-		name: "",
-		price: '',
+		name: "oi",
+		price: '40',
 		image: '',
 		imageLarge: '',
 		desc: ''
 	},
 	urn4: {
-		name: "",
-		price: '',
+		name: "sup",
+		price: '12',
 		image: '',
 		imageLarge: '',
 		desc: ''
 	},
 	urn5: {
-		name: "",
-		price: '',
+		name: "pug",
+		price: '100',
 		image: '',
 		imageLarge: '',
 		desc: ''
 	},
 	urn6: {
-		name: "",
-		price: '',
+		name: "cooby",
+		price: '45',
 		image: '',
 		imageLarge: '',
 		desc: ''
