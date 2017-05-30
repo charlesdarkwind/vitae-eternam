@@ -8,12 +8,14 @@ class CartItem extends React.Component {
     const order = {...this.props.order};
   }*/
 	render() {
+		const { name, image } = this.props.details;
 		return (
 			<div>
 				<div className="cartItemWrap">	
 					<div className="cartItem">
-						{this.props.details}
-						<Button onClick={() => this.props.removeOrderItemFromOrder}>x</Button>
+						{ name }
+						<img src={image} className="cartImg" />
+						<Button onClick={() => this.props.removeOrderItem}>x</Button>
 					</div>	
 				</div>
 			</div>

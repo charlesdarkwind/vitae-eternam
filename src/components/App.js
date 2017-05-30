@@ -12,7 +12,7 @@ class App extends React.Component {
     super(props);
     this.loadSamples = this.loadSamples.bind(this);
     this.setOrderItem = this.setOrderItem.bind(this);
-    this.removeOrderItem = this.bind.removeOrderItem(this);
+    this.removeOrderItem = this.removeOrderItem.bind(this);
     this.logout = this.logout.bind(this);
     //this.authenticate = this.authenticate.bind(this);
   }
@@ -55,10 +55,6 @@ class App extends React.Component {
     if (this.props.order.indexOf(key) == -1) this.props.setOrderItem(key);
   }
 
-  removeOrderItem(key) {
-    this.props.removeOrderItem(this.props.removeOrderItem, key);
-  }
-
   logout() {
     base.unAuth();
     this.setState({ uid: null });
@@ -75,7 +71,6 @@ class App extends React.Component {
           updateUrn={this.props.updateUrn}
           removeUrn={this.props.removeUrn}
           setOrderItem={this.setOrderItem}
-          removeOrderItem={this.removeOrderItem}
         />
         <Footer />
       </div>          

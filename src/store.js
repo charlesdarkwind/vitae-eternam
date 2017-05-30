@@ -7,7 +7,7 @@ import rootReducer from './reducers/index';
 
 import urns from './SampleUrns';
 const user = {name: null, email: null, photoURL: null, uid: null, adress: {}};
-const order = [];
+const order = ["urn1", "urn2", "urn3", "urn4"];
 
 
 // create an object for the default data
